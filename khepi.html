@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Love Letter</title>
+
+<style>
+body{
+    margin:0;
+    background:linear-gradient(to right,#ff9a9e,#fad0c4);
+    font-family:Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+/* Envelope */
+.envelope{
+    position:relative;
+    width:320px;
+    height:200px;
+    background:#ff6f91;
+    cursor:pointer;
+    border-radius:6px;
+}
+
+.flap{
+    position:absolute;
+    width:0;
+    height:0;
+    border-left:160px solid transparent;
+    border-right:160px solid transparent;
+    border-bottom:100px solid #ff4d6d;
+    top:-100px;
+    transform-origin:bottom;
+    transition:0.8s;
+}
+
+.letter{
+    position:absolute;
+    width:280px;
+    height:170px;
+    background:white;
+    left:20px;
+    top:20px;
+    padding:15px;
+    text-align:center;
+    border-radius:8px;
+    box-shadow:0 5px 10px rgba(0,0,0,0.2);
+    transform:translateY(80px);
+    opacity:0;
+    transition:0.8s;
+}
+
+.envelope.open .flap{
+    transform:rotateX(180deg);
+}
+
+.envelope.open .letter{
+    transform:translateY(-50px);
+    opacity:1;
+}
+
+h2{
+    color:#ff4d6d;
+}
+
+p{
+    font-size:15px;
+}
+
+/* Floating hearts */
+.heart{
+    position:absolute;
+    color:red;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);opacity:1;}
+    100%{transform:translateY(-700px);opacity:0;}
+}
+
+/* Falling petals */
+.petal{
+    position:absolute;
+    color:#ff4d6d;
+    font-size:18px;
+    animation:fall 8s linear infinite;
+}
+
+@keyframes fall{
+    0%{transform:translateY(-50px);opacity:1;}
+    100%{transform:translateY(700px);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="openLetter()">
+    <div class="flap"></div>
+
+    <div class="letter">
+        <h2>My Love ❤️</h2>
+        <p>
+        From the moment I met you, my life became brighter.
+        Your smile is a trap, and i am trapped inside it.
+        </p>
+        <p>
+        No matter what happens, I will always care for you
+        and stand beside you.
+        </p>
+        <p><b>Forever yours 💌</b></p>
+    </div>
+</div>
+
+<audio id="music" loop>
+<source src="Music/
+chahun main ya naa.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function openLetter(){
+    document.querySelector(".envelope").classList.toggle("open");
+    document.getElementById("music").play();
+}
+
+/* floating hearts */
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(15+Math.random()*20)+"px";
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),6000);
+},400);
+
+/* falling petals */
+setInterval(()=>{
+let petal=document.createElement("div");
+petal.className="petal";
+petal.innerHTML="🌹";
+petal.style.left=Math.random()*100+"vw";
+petal.style.fontSize=(15+Math.random()*15)+"px";
+document.body.appendChild(petal);
+
+setTimeout(()=>petal.remove(),8000);
+},700);
+</script>
+
+</body>
+</html>
